@@ -32,7 +32,7 @@ export function BandraMap() {
     <svg viewBox="0 0 640 520" className="block h-auto w-full" role="img" aria-labelledby="map-title map-desc">
       <title id="map-title">Map of Bandra West showing Ember in Ranwar</title>
       <desc id="map-desc">
-        A stylised map, not to scale. Ember sits on Waroda Road in Ranwar, just north of Hill Road, between Bandra
+        A stylised map, not to scale. Ember is placed in Ranwar, just north of Hill Road, between Bandra
         station to the east and Bandstand on the sea front to the west.
       </desc>
       <defs>
@@ -152,7 +152,7 @@ export function BandraMap() {
             EMBER
           </text>
           <text x="14" y="34" fill="rgb(173 154 131)" fontSize="9.5" letterSpacing="1">
-            18 Waroda Road
+            Concept location
           </text>
         </g>
       </g>

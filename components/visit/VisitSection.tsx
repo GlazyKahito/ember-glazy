@@ -7,7 +7,7 @@ const directions = [
   { title: "By train", body: "Bandra station on the Western line, then ten minutes by rickshaw up Hill Road." },
   {
     title: "By car",
-    body: "Valet on Waroda Road from 7 pm. The lanes in Ranwar are narrow, so drop off and walk the last bit.",
+    body: "Valet from 7 pm. The lanes in Ranwar are narrow, so drop off and walk the last bit.",
   },
 ];
 

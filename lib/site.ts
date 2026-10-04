@@ -9,7 +9,7 @@ export const site = {
     url: "https://glazy-portfolio.vercel.app",
   },
   address: {
-    street: "Ground floor, 18 Waroda Road",
+    street: "Concept address",
     area: "Ranwar, Bandra West",
     city: "Mumbai 400050",
   },
