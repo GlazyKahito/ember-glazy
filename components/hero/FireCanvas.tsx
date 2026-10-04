@@ -378,7 +378,7 @@ function Scene({ wordRef, input, reduced, count, lowPower, compiled, onCompiled,
       (f.uniforms.uRes.value as THREE.Vector2).set(width, height);
       f.uniforms.uWind.value = s.wind;
       f.uniforms.uIntensity.value = intensity;
-      f.uniforms.uBase.value = width < 700 ? 0.2 : 0.23;
+      f.uniforms.uBase.value = width < 700 ? (height > width * 1.4 ? 0.27 : 0.2) : 0.23;
     }
 
     const t = textMat.current;
