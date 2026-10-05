@@ -55,12 +55,12 @@ export function SiteHeader() {
         >
           <motion.div style={{ backgroundColor: bg, borderColor: border }} className="border-b">
             <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 md:h-20 lg:px-12">
-              <a href="#top" className="group flex items-center gap-2.5" aria-label="Ember, back to top">
+              <a href="#top" className="group flex items-center gap-2.5" aria-label="Ember Concept, back to top">
                 <FlameMark
                   id="flame-header"
                   className="size-6 transition-transform duration-500 group-hover:-translate-y-0.5"
                 />
-                <span className="font-display text-[1.35rem] tracking-[0.06em] text-cream">EMBER</span>
+                <span className="font-display text-[1.35rem] tracking-[0.06em] text-cream">EMBER</span>{" "}
                 <span className="ml-1 inline-block rounded-full border border-[var(--line-strong)] px-2 py-0.5 text-[0.62rem] tracking-[0.16em] text-muted uppercase">
                   Concept
                 </span>

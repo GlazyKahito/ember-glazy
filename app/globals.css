@@ -8,7 +8,7 @@
   --color-cream: #f4e9d8;
   --color-parchment: #dccbb2;
   --color-muted: #ad9a83;
-  --color-dim: #7d6b5b;
+  --color-dim: #8b7765; /* 4.7:1 on char, so the small index numerals pass AA */
   --color-ember: #ff6b2c;
   --color-flame: #ffa149;
   --color-gold: #ffcf8a;
@@ -24,8 +24,8 @@
 }
 
 @theme inline {
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces-rupee), var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-schibsted-rupee), var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {

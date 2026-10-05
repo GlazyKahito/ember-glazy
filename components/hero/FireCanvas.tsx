@@ -4,7 +4,7 @@ import { PerformanceMonitor } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useCallback, useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import * as THREE from "three";
-import { intro } from "@/lib/intro";
+import { intro, useIntro } from "@/lib/intro";
 import { emberFragment, emberVertex, fireFragment, fireVertex, textFragment, textVertex } from "./shaders";
 
 type Input = { x: number; y: number; vx: number; vy: number; t: number };
@@ -63,6 +63,8 @@ export function FireCanvas({ wordRef, hostRef, active, reduced, onTextReady }: P
   const [compiled, setCompiled] = useState(false);
   const onCompiled = useCallback(() => setCompiled(true), []);
   const input = useRef<Input>({ x: 0, y: -0.35, vx: 0, vy: 0, t: 0 });
+  // The opening overlay is opaque while it counts: draw only the frames the wordmark asks for.
+  const covered = useIntro().phase === "loading";
 
   useEffect(() => {
     if (reduced) return;
@@ -88,7 +90,7 @@ export function FireCanvas({ wordRef, hostRef, active, reduced, onTextReady }: P
 
   return (
     <Canvas
-      frameloop={!compiled ? "never" : reduced ? "demand" : active ? "always" : "never"}
+      frameloop={!compiled ? "never" : reduced ? "demand" : !active ? "never" : covered ? "demand" : "always"}
       dpr={dpr}
       flat
       gl={{

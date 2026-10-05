@@ -7,10 +7,10 @@ import { ease } from "@/components/motion";
 import { dayNames, formatMinutes, longDate, nextDays, slotsFor } from "@/lib/hours";
 import {
   fieldOrder,
+  loadValidator,
   NOTES_MAX,
   normalisePhone,
   seatingOptions,
-  validateReservation,
   type Errors,
   type Field,
   type ReservationInput,
@@ -112,13 +112,20 @@ export function ReservationForm() {
       next.time = "";
     }
     setValues(next);
-    if (attempted) setErrors(validateReservation(next, today, nowMinutes));
+    // After the first submit the rules are already loaded, so this settles within the same frame.
+    if (attempted) void loadValidator().then((validate) => setErrors(validate(next, today, nowMinutes)), () => {});
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === "sending") return;
-    const found = validateReservation(values, today, nowMinutes);
+    let validate;
+    try {
+      validate = await loadValidator();
+    } catch {
+      return; // offline before the rules arrived: the next submit retries
+    }
+    const found = validate(values, today, nowMinutes);
     setAttempted(true);
     setErrors(found);
     const first = fieldOrder.find((f) => found[f]);
@@ -214,6 +221,8 @@ export function ReservationForm() {
             key="form"
             noValidate
             onSubmit={onSubmit}
+            // Fetch the rules as soon as someone starts on the form, well before they submit.
+            onFocus={() => void loadValidator().catch(() => {})}
             aria-describedby="res-concept"
             className="relative flex flex-col gap-8 p-5 sm:p-8 lg:p-10"
             initial={{ opacity: 0 }}

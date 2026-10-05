@@ -1,47 +1,34 @@
-# Ember — Kitchen & Bar, Bandra
+# Ember
 
-A concept website for a wood-fire restaurant and bar in Bandra West, Mumbai. Ember is not a real place: the menu, hours
-and address are made up, and the reservation form never sends anything anywhere.
-
-The hero is a living fire drawn in WebGL: a GLSL flame field made of layered simplex noise, a few thousand embers rising
-on curl noise that drift away from the pointer, and the EMBER wordmark rendered from the page's own type, with heat haze
-and letters that catch one by one after a short opening sequence.
+A site for a fictional wood-fire kitchen and bar in Bandra West, Mumbai, with a living WebGL fire as its hero. A concept site by [GLAZY](https://glazy-portfolio.vercel.app), a freelance web & SaaS agency.
 
 **Live:** https://ember-glazy.vercel.app
 
-## What is in it
+## Technically interesting
 
-- Opening sequence with a real loading counter (fonts, scene and shaders), skippable with a button or Escape, shown once
-  per session and still under reduced motion
-- Fire, embers and wordmark built with React Three Fiber and custom shaders; shaders compile asynchronously, rendering
-  pauses off screen, particle count and pixel ratio adapt to the device
-- A still CSS and SVG fire for browsers without WebGL 2 (try `?gl=0`) and a static frame for `prefers-reduced-motion`
-- Menu with keyboard-accessible tabs, veg and non-veg marks and dietary tags
-- Scroll-driven story section, live open or closed badge in Mumbai time
-- Reservation form with day, time, party size and seating pickers, zod validation and a confirmation state
-- Hand-drawn SVG map of Bandra West, no map API
+- **Fire, embers and wordmark in custom GLSL** (React Three Fiber). The flame field is layered simplex noise. A few thousand embers rise on curl noise and drift away from the pointer. The EMBER wordmark is drawn from the page's own type, with heat haze and letters that catch one by one.
+- **Opening sequence driven by real loading** (fonts, the scene module, shaders, the drawn wordmark). Shaders compile in parallel before the first frame, and while the opaque intro covers the fire the scene renders only on demand. It plays once per session and Escape skips it.
+- **Adapts to the device.** Rendering pauses off screen, and the particle count and pixel ratio adapt to the device. Browsers without WebGL 2 get a still CSS and SVG fire (try `?gl=0`), and reduced motion gets a static frame.
+- **One-glyph font subsets.** The ₹ in the menu comes from one-glyph cuts of the two typefaces, with all variation axes kept, so it no longer pulls in their Latin Extended files (about 124 KB).
+- **Reservation form** with day, time, party and seating pickers, plus zod validation that loads only when someone starts on the form. Nothing is ever sent.
+- **Menu and map.** Menu tabs work from the keyboard, the open-or-closed badge runs on Mumbai time, and the map of Bandra West is hand-drawn SVG, with no map API.
 
 ## Stack
 
-Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, three.js with @react-three/fiber and drei, Motion, zod.
-Fonts are Fraunces and Schibsted Grotesk via `next/font`.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, three.js, @react-three/fiber, @react-three/drei, Motion, zod.
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev
+npm run dev       # http://localhost:3000
+npm run build     # production build
+npm run lint
+npm run typecheck
 ```
 
-Then open http://localhost:3000. `npm run build` makes a production build and `npm run lint` checks the code.
+## Credits and licences
 
-## Credits
-
-- Simplex noise in the shaders follows the MIT-licensed [webgl-noise](https://github.com/ashima/webgl-noise) by Ian
-  McEwan and Stefan Gustavson.
-- Fraunces by Undercase Type and Schibsted Grotesk by Schibsted, both from Google Fonts under the SIL Open Font License.
-- Everything else, including the map and the flame mark, is drawn for this project.
-
----
-
-Concept site by GLAZY — https://glazy-portfolio.vercel.app
+- Simplex noise in the shaders follows [webgl-noise](https://github.com/ashima/webgl-noise) by Ian McEwan and Stefan Gustavson (MIT License).
+- Fraunces by Undercase Type and Schibsted Grotesk by Schibsted: SIL Open Font License, from Google Fonts via `next/font`. The two ₹ subsets in `app/fonts/` are cut from the same files under the same licence.
+- Everything else, including the map and the flame mark, was drawn for this project. Ember, its menu, hours and address are fictional.

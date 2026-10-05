@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Schibsted_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import { Providers } from "@/components/Providers";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -16,6 +17,33 @@ const schibsted = Schibsted_Grotesk({
   variable: "--font-schibsted",
   subsets: ["latin"],
   display: "swap",
+});
+
+/*
+ * The ₹ in the menu is the only character outside the Latin subsets. These one-glyph
+ * cuts of the same two fonts (axes intact) sit first in each stack and cover only U+20B9,
+ * so the rupee no longer pulls in both Latin Extended files (about 124 KB).
+ */
+const frauncesRupee = localFont({
+  src: "./fonts/fraunces-rupee.woff2",
+  variable: "--font-fraunces-rupee",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  declarations: [{ prop: "unicode-range", value: "U+20B9" }],
+});
+
+const schibstedRupee = localFont({
+  src: "./fonts/schibsted-rupee.woff2",
+  variable: "--font-schibsted-rupee",
+  weight: "400 900",
+  style: "normal",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  declarations: [{ prop: "unicode-range", value: "U+20B9" }],
 });
 
 export const metadata: Metadata = {
@@ -71,7 +99,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en-IN"
       data-intro="seen"
-      className={`${fraunces.variable} ${schibsted.variable}`}
+      className={`${fraunces.variable} ${schibsted.variable} ${frauncesRupee.variable} ${schibstedRupee.variable}`}
       suppressHydrationWarning
     >
       <body>
